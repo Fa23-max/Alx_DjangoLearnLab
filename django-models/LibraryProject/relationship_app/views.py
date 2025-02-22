@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.views.generic.detail import DetailView 
 from .models import Library,Book
 from django.contrib.auth import login
+from django.contrib.auth.views import LoginView,LogoutView
 
 
 
@@ -17,6 +18,12 @@ def register(request):
     else:
         form = UserCreationForm()
     return render(request, "registration/register.html", {"form": form})
+
+class CustomLoginView(LoginView):
+    template_name = 'Login.html'
+
+class CustomLogoutView(LogoutView):
+    template_name = 'Login.html'
 
 def list_books(request):
     books = Book.objects.all()
