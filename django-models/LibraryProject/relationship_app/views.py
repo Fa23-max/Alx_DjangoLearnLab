@@ -4,6 +4,7 @@ from django.views.generic.detail import DetailView
 from .models import Library,Book
 from django.contrib.auth import login
 from django.contrib.auth.views import LoginView,LogoutView
+from django.contrib.auth.decorators import user_passes_test, login_required
 
 
 
@@ -39,3 +40,28 @@ class LibraryDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['books'] = Book.objects.filter(library=self.object)
         return context
+
+
+def check_admin(user):
+    return user.userprofile.role == 'Admin'
+
+def check_librarian(user):
+    return user.userprofile.role == 'Librarian'
+
+def check_member(user):
+    return user.userprofile.role == 'Member'
+
+@login_required
+@user_passes_test(check_admin)
+def admin_view(request):
+    return render(request,'relationship_app/admin_view.html')
+
+@login_required
+@user_passes_test(check_librarian)
+def librarian_view(request):
+    return render(request,'relationship_app/librarian_view.html')
+
+@login_required
+@user_passes_test(check_member)
+def member_view(request):
+    return render(request,'relationship_app/member_view.html')
