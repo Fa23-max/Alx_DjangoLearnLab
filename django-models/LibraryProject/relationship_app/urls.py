@@ -1,6 +1,6 @@
 from . import views
 from django.urls import path,include
-from .views import SingUpView,list_books ,LibraryDetailView,TemplateView,LoginView ,LogoutView
+from .views import SingUpView,list_books ,LibraryDetailView,TemplateView,LoginView ,LogoutView,registerView
 from django.views.generic import TemplateView
 
 urlpatterns = [
