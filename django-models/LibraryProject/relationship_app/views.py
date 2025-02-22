@@ -4,7 +4,7 @@ from django.views.generic.detail import DetailView
 from .models import Library,Book
 from django.contrib.auth import login
 from django.contrib.auth.views import LoginView,LogoutView
-from django.contrib.auth.decorators import user_passes_test, login_required
+from django.contrib.auth.decorators import user_passes_test, login_required,permission_required
 
 
 
@@ -65,3 +65,16 @@ def librarian_view(request):
 @user_passes_test(check_member)
 def member_view(request):
     return render(request,'relationship_app/member_view.html')
+
+
+@permission_required("relationship_app/can_add_book")
+def can_add_book_view(request):
+    return render(request,"relationship_app/can_add_book.html")
+
+@permission_required("relationship_app/can_change_book")
+def can_change_book_view(request):
+    return render(request,"relationship_app/can_change_book.html")
+
+@permission_required("relationship_app/can_delete_book")
+def can_delete_book_view(request):
+    return render(request,"relationship_app/can_delete_book.html")
