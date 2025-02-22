@@ -1,18 +1,15 @@
 from . import views
-from django.urls import path,include
-from .views import SingUpView,list_books ,LibraryDetailView,TemplateView,LoginView ,LogoutView,registerView
-from django.views.generic import TemplateView
+from django.urls import path
+from django.contrib.auth.views import LoginView, LogoutView
+from .views import list_books,LibraryDetailView
+
 
 urlpatterns = [
-    path('library_details/',LibraryDetailView.as_views(),name='library_details'),
-    path("register",views.register,name="templates/registration/register"),
+    path('library_details/',LibraryDetailView.as_view(),name='library_details'),
+    path("register/", views.register, name="register"),
     path("",views.list_books,name="list_books"),
-    path('accounts/', include('django.contrib.auth.urls')),
-    path('accounts/profile/',
-             TemplateView.as_view(template_name='accounts/profile.html'),
-             name='profile'),
-    path('login/', LoginView.as_view(template_name="registration/login.html"), name='login'),
-    path('logout/',LogoutView.as_view(template_name=""))
-    
-    
+    path("login/", LoginView.as_view(template_name="login.html"), name="login"),
+    path("logout/", LogoutView.as_view(template_name="logout.html"), name="logout")
+
+
 ]
