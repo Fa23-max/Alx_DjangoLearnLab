@@ -17,7 +17,7 @@ def register(request):
             return redirect ("/")
     else:
         form = UserCreationForm()
-    return render(request, "registration/register.html", {"form": form})
+    return render(request, "relationship_app/register.html", {"form": form})
 
 class CustomLoginView(LoginView):
     template_name = 'Login.html'
