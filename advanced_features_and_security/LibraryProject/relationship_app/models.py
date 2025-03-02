@@ -2,10 +2,9 @@ from django.db import models
 from django.contrib.auth.models import User,AbstractUser,UserManager
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from bookshelf.models import CustomUser
 
-class CustomUser(AbstractUser):
-   date_of_birth = models.DateField()
-   profile_photo = models.ImageField()
+
 
 # Create your models here.
 class Author(models.Model):
@@ -58,19 +57,3 @@ class UserProfile(models.Model):
 
 
 
-class CustomUserManager(UserManager):
-    def create_user(self, username, email=None, password=None, date_of_birth=None,profile_photo=None,**extra_fields):
-        extra_fields.setdefault("is_staff", False)
-        extra_fields.setdefault("is_superuser", False)
-        return self._create_user(username, email, password,date_of_birth, profile_photo,**extra_fields)
-
-    def create_superuser(self, username, email=None, password=None,date_of_birth=None,profile_photo=None, **extra_fields):
-        extra_fields.setdefault("is_staff", True)
-        extra_fields.setdefault("is_superuser", True)
-
-        if extra_fields.get("is_staff") is not True:
-            raise ValueError("Superuser must have is_staff=True.")
-        if extra_fields.get("is_superuser") is not True:
-            raise ValueError("Superuser must have is_superuser=True.")
-        
-        return self._create_user(username, email, password,date_of_birth, profile_photo, **extra_fields)
