@@ -7,6 +7,10 @@ class Book(models.Model):
   author = models.CharField(max_length=100)
   publication_year = models.IntegerField()
 
+  class Meta:
+    permissions =(('can_create', 'Can create'),('can_view', 'Can view'),('can_edit', 'Can edit'),('can_delete', 'Can delete'),)
+    # Assign permission to a group
+   
 class CustomUser(AbstractUser):
    date_of_birth = models.DateField()
    profile_photo = models.ImageField()
@@ -27,3 +31,6 @@ class CustomUserManager(BaseUserManager):
             raise ValueError("Superuser must have is_superuser=True.")
         
         return self._create_user(username, email, password,date_of_birth, profile_photo, **extra_fields)
+    
+
+
