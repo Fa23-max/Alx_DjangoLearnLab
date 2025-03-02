@@ -1,6 +1,8 @@
 from django.shortcuts import render,redirect
 from .forms import Bookform,Book
 from django.contrib.auth.decorators import permission_required
+from .forms import ExampleForm
+
 
 @permission_required('bookshelf.can_create', raise_exception=True)
 def create_book(request):
