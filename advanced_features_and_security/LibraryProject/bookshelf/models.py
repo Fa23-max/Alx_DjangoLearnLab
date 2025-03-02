@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User,AbstractUser,UserManager
+from django.contrib.auth.models import User,AbstractUser,BaseUserManager
 
 # Create your models here.
 class Book(models.Model):
@@ -11,7 +11,7 @@ class CustomUser(AbstractUser):
    date_of_birth = models.DateField()
    profile_photo = models.ImageField()
 
-class CustomUserManager(UserManager):
+class CustomUserManager(BaseUserManager):
     def create_user(self, username, email=None, password=None, date_of_birth=None,profile_photo=None,**extra_fields):
         extra_fields.setdefault("is_staff", False)
         extra_fields.setdefault("is_superuser", False)
