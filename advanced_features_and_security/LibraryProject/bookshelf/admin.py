@@ -8,9 +8,10 @@ class Bookadmin(admin.ModelAdmin) :
 class CustomUserAdmin(admin.ModelAdmin):
     ...
 
-    
+
 # Register your models here.
+admin.site.register(CustomUser, CustomUserAdmin)
 admin.site.register(Book,Bookadmin)
-admin.site.register(CustomUser,CustomUserAdmin)
+
 
 
