@@ -1,6 +1,7 @@
 from rest_framework import generics.ListAPIView
 from .models import Book
 from .serializers import BookSerializer
+from rest_framework import viewsets.ModelViewset
 
 def BookList(ListAPIView):
     queryset = Book.objects.all()
@@ -13,3 +14,5 @@ def BookList(ListAPIView):
             queryset = queryset.filter(name__icontains=name_filter)
         return queryset
     
+def BookViewSet(ModelViewSet):
+    queryset =Book.objects.all()
