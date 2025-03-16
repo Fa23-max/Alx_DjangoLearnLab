@@ -14,3 +14,5 @@ class BookTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(Book.objects.count(), 1)
         self.assertEqual(Book.objects.get().name, 'DabApps')
+        response = self.client.get('/users/4/')
+        self.assertEqual(response.data, {'id': 4, 'username': 'lauren'})
