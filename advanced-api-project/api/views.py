@@ -1,6 +1,8 @@
 from .models import Book ,Author
 from .serializers import BookSerializer ,AuthorSerializer
 from rest_framework import generics 
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
+
 
 
 class ListView(generics.ListAPIView):
@@ -12,6 +14,8 @@ class DetailViews(generics.RetrieveAPIView):
     serializer_class = BookSerializer
 
 class CreateView(generics.CreateAPIView ):
+
+    permission_classes = (IsAuthenticatedOrReadOnly)
     queryset = Book.objects.all()
     serializer_class = BookSerializer
 
