@@ -4,8 +4,7 @@ from rest_framework.test import APITestCase,APIClient
 from .models import Book
 
 # Make all requests in the context of a logged in session.
-client = APIClient()
-client.login(username='lauren', password='secret')
+
 
 class BookTests(APITestCase):
     def test_create_Book(self):
@@ -20,3 +19,5 @@ class BookTests(APITestCase):
         self.assertEqual(Book.objects.get().name, 'DabApps')
         response = self.client.get('/users/4/')
         self.assertEqual(response.data, {'id': 4, 'username': 'lauren'})
+        client = APIClient()
+        self.client.login(username='lauren', password='secret')
