@@ -1,7 +1,11 @@
 from django.urls import reverse
 from rest_framework import status
-from rest_framework.test import APITestCase
+from rest_framework.test import APITestCase,APIClient
 from .models import Book
+
+# Make all requests in the context of a logged in session.
+client = APIClient()
+client.login(username='lauren', password='secret')
 
 class BookTests(APITestCase):
     def test_create_Book(self):
