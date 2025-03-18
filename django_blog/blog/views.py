@@ -53,7 +53,7 @@ class Update_blog(UpdateView):
 
 class Delete_blog(DeleteView):
     model = post
-    template_name ="deleting.html"
+    template_name ="deleting blog posts.html"
     success_url ="/"
 
     
