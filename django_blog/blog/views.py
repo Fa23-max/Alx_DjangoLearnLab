@@ -31,29 +31,29 @@ def profile(request):
 
 class Display_blog(ListView):
     model = post
-    template_name = "blog/posts/listing.html"
+    template_name = "listing.html"
     context_object_name = "blogs"
 
 class Blog_details(DetailView):
     model = post
-    template_name ="blog/posts/viewing.html"
+    template_name ="viewing.html"
     context_object_name = "blogs"
 
 class Create_blog(CreateView):
     model = post
-    template_name = "blog/posts/creating.html"
+    template_name = "creating.html"
     form_class = CreatePost
     success_url ="posts/"
 
 class Update_blog(UpdateView):
     model = post
-    template_name ="blog/posts/update.html"
+    template_name ="update.html"
     fields = ["title","content"]
     success_url = "posts/"
 
 class Delete_blog(DeleteView):
     model = post
-    template_name ="blog/posts/deleting.html"
+    template_name ="deleting.html"
     success_url ="/"
 
     
