@@ -1,7 +1,11 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
-from .forms import RegistrationForm
+from .forms import RegistrationForm,CreatePost
+from django.views.generic import ListView ,DetailView ,CreateView ,UpdateView ,DeleteView
+from .models import post
+
+
 
 def register(request):
     form = RegistrationForm(request.POST)
@@ -24,4 +28,34 @@ def profile(request):
 
     return render(request,'blog/profile.html')
 
+
+class Display_blog(ListView):
+    model = post
+    template_name = "blog/display.html"
+    context_object_name = "blogs"
+
+class Blog_details(DetailView):
+    model = post
+    template_name ="blog/details.html"
+    context_object_name = "blogs"
+
+class Create_blog(CreateView):
+    model = post
+    template_name = "blog/create.html"
+    form_class = CreatePost
+    success_url ="posts/"
+
+class Update_blog(UpdateView):
+    model = post
+    template_name ="blog/update.html"
+    fields = ["title","content"]
+    success_url = "posts/"
+
+class Delete_blog(DeleteView):
+    model = post
+    template_name ="blog/delete.html"
+    success_url ="/"
+
+    
+    
 
