@@ -10,9 +10,9 @@ urlpatterns = [
     path('profile/',views.profile, name="profile"),
     path('posts/',views.Display_blog.as_view(), name= "Display_blog"),
     path('posts/<int:pk>',views.Blog_details.as_view(),name="Blog_details"),
-    path('posts/new/',views.Create_blog.as_view(),name="Create_blog"),
-    path('posts/<int:pk>/edit/',views.Update_blog.as_view(),name="Update_blog"),
-    path('posts/<int:pk>/delete/',views.Delete_blog.as_view(),name="Delete_blog"),
+    path('post/new/',views.Create_blog.as_view(),name="Create_blog"),
+    path('post/<int:pk>/edit/',views.Update_blog.as_view(),name="Update_blog"),
+    path('post/<int:pk>/delete/',views.Delete_blog.as_view(),name="Delete_blog"),
 
 
 
