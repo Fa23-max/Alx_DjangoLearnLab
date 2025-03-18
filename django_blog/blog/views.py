@@ -8,7 +8,7 @@ def register(request):
     if form.is_valid():
         form.save()
         return HttpResponseRedirect(reverse('login'))
-    return render(request,"registration/register.html",{"form":form})
+    return render(request,"blog/register.html",{"form":form})
 
 def index(request):
     return render (request ,'blog/index.html')
