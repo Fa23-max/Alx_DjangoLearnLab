@@ -1,0 +1,27 @@
+{% extends "./base.html" %}
+{% block content %}
+
+<form action="{% url "profile" %}" method="post">
+    {% csrf_token %}
+    <label for="username">Username</label>
+    <input type="text" id="username"  name="username"><br><br>
+
+    <label for="email">Email</label>
+    <input type="email" name="email" id="email"><br><br>
+
+    <label for="bio">Bio</label>
+    <textarea name="bio" id="bio"></textarea><br><br>
+
+    <label for="Profile_Photo">Profile</label>
+    <input type="file" class="form-control-file" id="Profile_Photo" name="profile_img"><br><br>
+
+    <button type="submit">Submit</button>
+    
+</form>
+<div>
+    <p>{{username}}</p>
+    <p>{{email}}</p>
+</div>
+
+{% endblock content %}
+
