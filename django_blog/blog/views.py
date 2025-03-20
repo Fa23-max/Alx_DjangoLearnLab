@@ -41,13 +41,13 @@ class Blog_details(DetailView):
 
 class Create_blog(CreateView):
     model = post
-    template_name = "post_form/create.html"
+    template_name = "post_form.html"
     form_class = CreatePost
     success_url ="posts/"
 
 class Update_blog(UpdateView):
     model = post
-    template_name ="post_form/edit.html"
+    template_name ="post_form.html"
     fields = ["title","content"]
     success_url = "posts/"
 
