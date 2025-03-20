@@ -1,9 +1,11 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from django.urls import reverse
-from .forms import RegistrationForm,CreatePost
+from django.urls import reverse,reverse_lazy
+from .forms import RegistrationForm
 from django.views.generic import ListView ,DetailView ,CreateView ,UpdateView ,DeleteView
 from .models import post
+from django.contrib.auth.mixins import LoginRequiredMixin ,UserPassesTestMixin
+
 
 
 
@@ -39,22 +41,32 @@ class Blog_details(DetailView):
     template_name ="blog/post_detail.html"
     context_object_name = "blogs"
 
-class Create_blog(CreateView):
+class Create_blog(LoginRequiredMixin,CreateView):
     model = post
-    template_name = "post_form.html"
-    form_class = CreatePost
-    success_url ="posts/"
-
-class Update_blog(UpdateView):
-    model = post
-    template_name ="post_form.html"
+    template_name = "blog/post_form.html"
     fields = ["title","content"]
-    success_url = "posts/"
+    success_url =reverse_lazy("Display_blog")
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+class Update_blog(LoginRequiredMixin,UpdateView,UserPassesTestMixin):
+    model = post
+    template_name ="blog/post_form.html"
+    fields = ["title","content"]
+    success_url = reverse_lazy("Display_blog")
+
+    def test_func(self):
+        return self.request.user == self.get_object().author
+
 
 class Delete_blog(DeleteView):
     model = post
     template_name ="blog/post_delete.html"
     success_url ="/"
+
+
 
     
     

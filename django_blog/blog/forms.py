@@ -9,21 +9,21 @@ class RegistrationForm(UserCreationForm):
         model = User
         fields = ("username","email")
 
-class CreatePost(forms.ModelForm):
-    title = forms.CharField()
-    content = forms.CharField()
+# class CreatePost(forms.ModelForm):
+#     title = forms.CharField()
+#     content = forms.CharField()
 
-    class Meta:
-        model = post
-        fields = ("title","content")
+#     class Meta:
+#         model = post
+#         fields = ("title","content")
 
    
-class CommentForm(forms.ModelForm):
-    content = forms.CharField()
+# class CommentForm(forms.ModelForm):
+#     content = forms.CharField()
 
-    class Meta:
-        model = Comment
-        fields = ("content")
+#     class Meta:
+#         model = Comment
+#         fields = ("content")
 
 
 
