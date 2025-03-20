@@ -5,6 +5,8 @@ from .forms import RegistrationForm
 from django.views.generic import ListView ,DetailView ,CreateView ,UpdateView ,DeleteView
 from .models import post
 from django.contrib.auth.mixins import LoginRequiredMixin ,UserPassesTestMixin
+from django.contrib.auth.decorators import login_required
+
 
 
 
@@ -19,6 +21,7 @@ def register(request):
 def index(request):
     return render (request ,'blog/index.html')
 
+@login_required
 def profile(request):
     if request.method == "POST":
         w = request.POST["username"]
