@@ -89,7 +89,7 @@ class CommentUpdateView(LoginRequiredMixin,UpdateView,UserPassesTestMixin):
     def test_func(self):
         return self.request.user == self.get_object().author
 
-class Delete_blog(LoginRequiredMixin,DeleteView,UserPassesTestMixin):
+class CommentDeleteView(LoginRequiredMixin,DeleteView,UserPassesTestMixin):
     model = post
     template_name ="blog/comment_delete.html"
     success_url ="/"
