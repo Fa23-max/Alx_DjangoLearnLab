@@ -97,6 +97,6 @@ class CommentDeleteView(LoginRequiredMixin,DeleteView,UserPassesTestMixin):
     def test_func(self):
         return self.request.user == self.get_object().author
 
-    
+post.objects.filter("title__icontains", "tags__name__icontains", "content__icontains")    
     
 
