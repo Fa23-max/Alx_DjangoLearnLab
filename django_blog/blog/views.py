@@ -1,9 +1,9 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse,reverse_lazy
-from .forms import RegistrationForm
+from .forms import RegistrationForm,CommentForm
 from django.views.generic import ListView ,DetailView ,CreateView ,UpdateView ,DeleteView
-from .models import post
+from .models import post,Comment
 from django.contrib.auth.mixins import LoginRequiredMixin ,UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
 
@@ -70,6 +70,32 @@ class Delete_blog(DeleteView):
     success_url ="/"
 
 
+class CommentCreateView(LoginRequiredMixin,CreateView):
+    model = Comment
+    template_name = "blog/comment_form.html"
+    form_class = CommentForm
+    success_url =reverse_lazy("Display_blog")
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+class CommentUpdateView(LoginRequiredMixin,UpdateView,UserPassesTestMixin):
+    model = Comment
+    template_name ="blog/comment_form.html"
+    form_class = CommentForm
+    success_url = reverse_lazy("Display_blog")
+
+    def test_func(self):
+        return self.request.user == self.get_object().author
+
+class Delete_blog(LoginRequiredMixin,DeleteView,UserPassesTestMixin):
+    model = post
+    template_name ="blog/comment_delete.html"
+    success_url ="/"
+
+    def test_func(self):
+        return self.request.user == self.get_object().author
 
     
     

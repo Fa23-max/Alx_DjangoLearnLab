@@ -18,12 +18,12 @@ class RegistrationForm(UserCreationForm):
 #         fields = ("title","content")
 
    
-# class CommentForm(forms.ModelForm):
-#     content = forms.CharField()
+class CommentForm(forms.ModelForm):
+    content = forms.CharField()
 
-#     class Meta:
-#         model = Comment
-#         fields = ("content")
+    class Meta:
+        model = Comment
+        fields = ("content")
 
 
 
