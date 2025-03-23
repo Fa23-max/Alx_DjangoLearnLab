@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.urls import reverse,reverse_lazy
 from .forms import RegistrationForm,CommentForm
 from django.views.generic import ListView ,DetailView ,CreateView ,UpdateView ,DeleteView
-from .models import post,Comment
+from .models import post,Comment 
 from django.contrib.auth.mixins import LoginRequiredMixin ,UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
 
@@ -97,6 +97,6 @@ class CommentDeleteView(LoginRequiredMixin,DeleteView,UserPassesTestMixin):
     def test_func(self):
         return self.request.user == self.get_object().author
 
-post.objects.filter("title__icontains", "tags__name__icontains", "content__icontains")    
+   
     
 
