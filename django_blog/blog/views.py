@@ -107,6 +107,11 @@ class CommentDeleteView(LoginRequiredMixin,DeleteView,UserPassesTestMixin):
     def test_func(self):
         return self.request.user == self.get_object().author
 
+class PostByTagListView(ListView):
+    model = Post
+    def get_queryset(self):
+        return super().get_queryset()
+    
 
     
 
