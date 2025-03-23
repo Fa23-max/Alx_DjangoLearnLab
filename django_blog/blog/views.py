@@ -33,11 +33,21 @@ def profile(request):
 
     return render(request,'blog/profile.html')
 
+def searchPost(request,pk):
+    if request.method == "POST":
+        user_search = request.POST["search"]
+        title_check = post.objects.filter(title_icontains = user_search)
+        tegs_check = post.objects.filter(tags__name__icontains = user_search)
+        content_check = post.objects.filter(content__icontains = user_search)
+
+    return HttpResponseRedirect(reverse("home"))  
+
 
 class Display_blog(ListView):
     model = post
     template_name = "blog/post_list.html"
     context_object_name = "blogs"
+
 
 class Blog_details(DetailView):
     model = post
@@ -97,6 +107,6 @@ class CommentDeleteView(LoginRequiredMixin,DeleteView,UserPassesTestMixin):
     def test_func(self):
         return self.request.user == self.get_object().author
 
-   
+
     
 
