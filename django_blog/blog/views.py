@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.urls import reverse,reverse_lazy
 from .forms import RegistrationForm,CommentForm
 from django.views.generic import ListView ,DetailView ,CreateView ,UpdateView ,DeleteView
-from .models import post,Comment 
+from .models import Post,Comment 
 from django.contrib.auth.mixins import LoginRequiredMixin ,UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
 
@@ -36,26 +36,26 @@ def profile(request):
 def searchPost(request,pk):
     if request.method == "POST":
         user_search = request.POST["search"]
-        title_check = post.objects.filter(title_icontains = user_search)
-        tegs_check = post.objects.filter(tags__name__icontains = user_search)
-        content_check = post.objects.filter(content__icontains = user_search)
+        title_check = Post.objects.filter(title__icontains = user_search)
+        tegs_check = Post.objects.filter(tags__name__icontains = user_search)
+        content_check = Post.objects.filter(content__icontains = user_search)
 
     return HttpResponseRedirect(reverse("home"))  
 
 
 class Display_blog(ListView):
-    model = post
-    template_name = "blog/post_list.html"
+    model = Post
+    template_name = "blog/p_list.html"
     context_object_name = "blogs"
 
 
 class Blog_details(DetailView):
-    model = post
+    model = Post
     template_name ="blog/post_detail.html"
     context_object_name = "blogs"
 
 class Create_blog(LoginRequiredMixin,CreateView):
-    model = post
+    model = Post
     template_name = "blog/post_form.html"
     fields = ["title","content"]
     success_url =reverse_lazy("Display_blog")
@@ -65,7 +65,7 @@ class Create_blog(LoginRequiredMixin,CreateView):
         return super().form_valid(form)
 
 class Update_blog(LoginRequiredMixin,UpdateView,UserPassesTestMixin):
-    model = post
+    model = Post
     template_name ="blog/post_form.html"
     fields = ["title","content"]
     success_url = reverse_lazy("Display_blog")
@@ -75,7 +75,7 @@ class Update_blog(LoginRequiredMixin,UpdateView,UserPassesTestMixin):
 
 
 class Delete_blog(DeleteView):
-    model = post
+    model = Post
     template_name ="blog/post_delete.html"
     success_url ="/"
 
@@ -100,7 +100,7 @@ class CommentUpdateView(LoginRequiredMixin,UpdateView,UserPassesTestMixin):
         return self.request.user == self.get_object().author
 
 class CommentDeleteView(LoginRequiredMixin,DeleteView,UserPassesTestMixin):
-    model = post
+    model = Post
     template_name ="blog/comment_delete.html"
     success_url ="/"
 
