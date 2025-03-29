@@ -3,13 +3,13 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import get_user_model
-from .serializers import RegisterSerializer, LoginSerializer, CustomUserSerializer
+from .serializers import LoginSerializer,RegistrationUserserializer,CustomUserserializer
 
 CustomUser = get_user_model()
 
 class RegisterUserView(generics.CreateAPIView):
     queryset = CustomUser.objects.all()
-    serializer_class = RegisterSerializer
+    serializer_class = RegistrationUserserializer
     permission_classes = [permissions.AllowAny]
 
 class LoginUserView(APIView):
@@ -29,5 +29,5 @@ class LogoutUserView(APIView):
 
 class RetrieveUserView(generics.RetrieveAPIView):
     queryset = CustomUser.objects.all()
-    serializer_class = CustomUserSerializer
+    serializer_class = CustomUserserializer
     permission_classes = [permissions.IsAuthenticated]
