@@ -30,7 +30,7 @@ ALLOWED_HOSTS = []
 # X_FRAME_OPTIONS
 # SECURE_SSL_REDIRECT
 #"PORT"
-
+#"STATIC_ROOT"
 # Application definition
 
 INSTALLED_APPS = [
