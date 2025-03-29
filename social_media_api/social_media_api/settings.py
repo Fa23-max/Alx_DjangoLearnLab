@@ -26,6 +26,9 @@ SECRET_KEY = 'django-insecure-9sf)_&(35_v8q2(001@1^&5b98h9$9fh2zeo_#g1cd4#rs*!wh
 DEBUG = False
 
 ALLOWED_HOSTS = []
+# SECURE_BROWSER_XSS_FILTER
+# X_FRAME_OPTIONS
+# SECURE_SSL_REDIRECT
 
 
 # Application definition
